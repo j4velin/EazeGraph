@@ -105,7 +105,7 @@ public abstract class BaseChart extends ViewGroup {
     public void setLegendHeight(float _legendHeight) {
         mLegendHeight = Utils.dpToPx(_legendHeight);
 
-        if(getData.size() > 0)
+        if(getData().size() > 0)
             onDataChanged();
     }
 
@@ -139,10 +139,6 @@ public abstract class BaseChart extends ViewGroup {
      */
     public void setAnimationTime(int _animationTime) {
         mAnimationTime = _animationTime;
-    }
-
-    public void setShowValues(boolean _showValues) {
-        mShowValues = _showValues;
     }
 
     /**
