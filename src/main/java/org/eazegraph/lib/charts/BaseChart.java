@@ -28,6 +28,9 @@ import android.view.ViewGroup;
 import org.eazegraph.lib.R;
 import org.eazegraph.lib.utils.Utils;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public abstract class BaseChart extends ViewGroup {
 
     /**
@@ -106,6 +109,10 @@ public abstract class BaseChart extends ViewGroup {
         mAnimationTime = _animationTime;
     }
 
+    public void setShowValues(boolean _showValues) {
+        mShowValues = _showValues;
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -139,6 +146,7 @@ public abstract class BaseChart extends ViewGroup {
     // Variables
     //##############################################################################################
 
+    protected final static NumberFormat mFormatter = NumberFormat.getInstance(Locale.getDefault());
 
     public static final float   DEF_LEGEND_HEIGHT       = 58.f;
     public static final int     DEF_LEGEND_COLOR        = 0xFF898989;
@@ -168,4 +176,6 @@ public abstract class BaseChart extends ViewGroup {
     protected float             mRevealValue        = 1.0f;
     protected int               mAnimationTime      = 1000;
     protected boolean           mStartedAnimation   = false;
+
+    protected boolean           mShowValues         = true;
 }
