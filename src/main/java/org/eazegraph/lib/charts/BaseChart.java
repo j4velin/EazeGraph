@@ -146,6 +146,14 @@ public abstract class BaseChart extends ViewGroup {
     }
 
     /**
+     * Determines if the values of each data should be shown in the graph.
+     * @param _showValues true to show values in the graph.
+     */
+    public void setShowValues(boolean _showValues) {
+        mShowValues = _showValues;
+    }
+
+    /**
      * This is called during layout when the size of this view has changed. If
      * you were just added to the view hierarchy, you're called with the old
      * values of 0.
