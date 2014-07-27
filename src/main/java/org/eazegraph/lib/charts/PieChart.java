@@ -840,8 +840,8 @@ public class PieChart extends BaseChart {
     }
 
     /**
-     * Returns the amount of datasets which are currently inserted.
-     * @return Amount of datasets.
+     * Returns the datasets which are currently inserted.
+     * @return the datasets
      */
     @Override
     public List<PieModel> getData() { return mPieData; }
