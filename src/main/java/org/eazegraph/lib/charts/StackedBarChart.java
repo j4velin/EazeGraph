@@ -6,17 +6,18 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eazegraph.lib.models.BarModel;
 import org.eazegraph.lib.models.BaseModel;
 import org.eazegraph.lib.models.StackedBarModel;
 import org.eazegraph.lib.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
- * Created by Paul Cech on 27/05/14.
+ * A rather simple type of a bar chart, where all the bars have the same height and their inner bars
+ * heights are dependent on each other.
  */
 public class StackedBarChart extends BaseBarChart {
     /**
@@ -51,24 +52,39 @@ public class StackedBarChart extends BaseBarChart {
         initializeGraph();
     }
 
+    /**
+     * Adds a new {@link org.eazegraph.lib.models.StackedBarModel} to the BarChart.
+     * @param _Bar The StackedBarModel which will be added to the chart.
+     */
     public void addBar(StackedBarModel _Bar) {
         mData.add(_Bar);
         onDataChanged();
     }
 
-    public void setData(List<StackedBarModel> _List) {
+    /**
+     * Adds a new list of {@link org.eazegraph.lib.models.StackedBarModel} to the BarChart.
+     * @param _List The StackedBarModel list which will be added to the chart.
+     */
+    public void addBarList(List<StackedBarModel> _List) {
         mData = _List;
         onDataChanged();
     }
 
-    @Override
+    /**
+     * Returns the data which is currently present in the chart.
+     * @return The currently used data.
+     */
+	@Override
     public List<StackedBarModel> getData() {
         return mData;
     }
 
+    /**
+     * Resets and clears the data object.
+     */
+    @Override
     public void clearChart() {
         mData.clear();
-        onDataChanged();
     }
 
     @Override
@@ -78,6 +94,10 @@ public class StackedBarChart extends BaseBarChart {
         return result;
     }
 
+    /**
+     * This is the main entry point after the graph has been inflated. Used to initialize the graph
+     * and its corresponding members.
+     */
     @Override
     protected void initializeGraph() {
         super.initializeGraph();
@@ -100,12 +120,21 @@ public class StackedBarChart extends BaseBarChart {
         }
     }
 
+    /**
+     * Should be called after new data is inserted. Will be automatically called, when the view dimensions
+     * has changed.
+     */
     @Override
     protected void onDataChanged() {
         calculateBarPositions(mData.size());
         super.onDataChanged();
     }
 
+    /**
+     * Calculates the bar boundaries based on the bar width and bar margin.
+     * @param _Width    Calculated bar width
+     * @param _Margin   Calculated bar margin
+     */
     protected void calculateBounds(float _Width, float _Margin) {
 
         int   last = mLeftPadding;
@@ -134,7 +163,11 @@ public class StackedBarChart extends BaseBarChart {
         Utils.calculateLegendInformation(mData, mLeftPadding, mGraphWidth + mLeftPadding, mLegendPaint);
     }
 
-    protected void drawBars(Canvas canvas) {
+    /**
+     * Callback method for drawing the bars in the child classes.
+     * @param _Canvas The canvas object of the graph view.
+     */
+    protected void drawBars(Canvas _Canvas) {
         for (StackedBarModel model : mData) {
             float lastTop;
             float lastBottom = mGraphHeight + mTopPadding;
@@ -146,7 +179,7 @@ public class StackedBarChart extends BaseBarChart {
                 float height = (bounds.height() * mRevealValue);
                 lastTop = lastBottom - height;
 
-                canvas.drawRect(
+                _Canvas.drawRect(
                         bounds.left,
                         lastTop,
                         bounds.right,
@@ -157,6 +190,10 @@ public class StackedBarChart extends BaseBarChart {
         }
     }
 
+    /**
+     * Returns the list of data sets which hold the information about the legend boundaries and text.
+     * @return List of BaseModel data sets.
+     */
     @Override
     protected List<? extends BaseModel> getLegendData() {
         return mData;
