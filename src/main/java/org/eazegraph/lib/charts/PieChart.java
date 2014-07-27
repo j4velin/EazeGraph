@@ -610,9 +610,7 @@ public class PieChart extends BaseChart {
     }
 
     @Override
-    protected int getDataSize() {
-        return mPieData.size();
-    }
+    public List<PieModel> getData() { return mPieData; }
 
     //##############################################################################################
     // Graph

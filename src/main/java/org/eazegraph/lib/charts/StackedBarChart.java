@@ -61,6 +61,7 @@ public class StackedBarChart extends BaseBarChart {
         onDataChanged();
     }
 
+    @Override
     public List<StackedBarModel> getData() {
         return mData;
     }
@@ -159,11 +160,6 @@ public class StackedBarChart extends BaseBarChart {
     @Override
     protected List<? extends BaseModel> getLegendData() {
         return mData;
-    }
-
-    @Override
-    protected int getDataSize() {
-        return mData.size();
     }
 
     //##############################################################################################

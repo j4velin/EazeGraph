@@ -26,9 +26,11 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 
 import org.eazegraph.lib.R;
+import org.eazegraph.lib.models.BaseModel;
 import org.eazegraph.lib.utils.Utils;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
 public abstract class BaseChart extends ViewGroup {
@@ -140,7 +142,7 @@ public abstract class BaseChart extends ViewGroup {
     protected void onDataChanged() {
         invalidate();
     }
-    protected abstract int getDataSize();
+    public abstract List<? extends BaseModel> getData();
 
     //##############################################################################################
     // Variables

@@ -79,6 +79,7 @@ public class BarChart extends BaseBarChart {
         onDataChanged();
     }
 
+    @Override
     public List<BarModel> getData() {
         return mData;
     }
@@ -164,11 +165,6 @@ public class BarChart extends BaseBarChart {
     @Override
     protected List<? extends BaseModel> getLegendData() {
         return mData;
-    }
-
-    @Override
-    protected int getDataSize() {
-        return mData.size();
     }
 
     //##############################################################################################

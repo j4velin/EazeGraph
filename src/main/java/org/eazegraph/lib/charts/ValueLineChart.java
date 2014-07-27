@@ -626,7 +626,7 @@ public class ValueLineChart extends BaseChart {
     }
 
     @Override
-    protected int getDataSize() { return mSeries.size(); }
+    public List<ValueLinePoint> getData() { return mSeries.get(0).getSeries(); }
 
     //##############################################################################################
     // Graph
