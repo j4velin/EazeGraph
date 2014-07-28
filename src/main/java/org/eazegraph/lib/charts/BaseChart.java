@@ -29,8 +29,8 @@ import org.eazegraph.lib.models.BaseModel;
 import org.eazegraph.lib.utils.Utils;
 
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Locale;
+import java.util.List;
 
 /**
  * This is the main chart class and should be inherited by every graph. This class provides some general
@@ -142,14 +142,6 @@ public abstract class BaseChart extends ViewGroup {
     }
 
     /**
-     * Determines if the values of each data should be shown in the graph.
-     * @param _showValues true to show values in the graph.
-     */
-    public void setShowValues(boolean _showValues) {
-        mShowValues = _showValues;
-    }
-
-    /**
      * This is called during layout when the size of this view has changed. If
      * you were just added to the view hierarchy, you're called with the old
      * values of 0.
@@ -246,5 +238,4 @@ public abstract class BaseChart extends ViewGroup {
     protected int               mAnimationTime      = 1000;
     protected boolean           mStartedAnimation   = false;
 
-    protected boolean           mShowValues         = true;
 }

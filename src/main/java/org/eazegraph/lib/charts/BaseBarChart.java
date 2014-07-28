@@ -182,6 +182,14 @@ public abstract class BaseBarChart extends BaseChart {
     }
 
     /**
+     * Invalidates graph and legend and forces them to be redrawn.
+     */
+    protected void invalidateGraphs() {
+        mGraph.invalidate();
+        mLegend.invalidate();
+    }
+
+    /**
      * This is the main entry point after the graph has been inflated. Used to initialize the graph
      * and its corresponding members.
      */
