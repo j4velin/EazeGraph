@@ -212,11 +212,7 @@ public class PieChart extends BaseChart {
      */
     public void setInnerPaddingColor(int color) {
         mInnerPaddingColor = color;
-<<<<<<< HEAD:src/main/java/org/eazegraph/lib/charts/PieChart.java
-        onDataChanged();
-=======
         mGraph.invalidate();
->>>>>>> upstream/master:EazeGraphLibrary/src/main/java/org/eazegraph/lib/charts/PieChart.java
     }
 
     /**
