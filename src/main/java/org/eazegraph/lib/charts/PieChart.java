@@ -106,6 +106,7 @@ public class PieChart extends BaseChart {
         mValueTextColor      = DEF_VALUE_TEXT_COLOR;
         mUseCustomInnerValue = DEF_USE_CUSTOM_INNER_VALUE;
         mOpenClockwise       = DEF_OPEN_CLOCKWISE;
+        mInnerPaddingColor   = DEF_INNER_PADDING_COLOR;
 
         initializeGraph();
     }
@@ -148,6 +149,7 @@ public class PieChart extends BaseChart {
             mValueTextColor      = a.getColor(R.styleable.PieChart_egValueTextColor,        DEF_VALUE_TEXT_COLOR);
             mUseCustomInnerValue = a.getBoolean(R.styleable.PieChart_egUseCustomInnerValue, DEF_USE_CUSTOM_INNER_VALUE);
             mOpenClockwise       = a.getBoolean(R.styleable.PieChart_egOpenClockwise,       DEF_OPEN_CLOCKWISE);
+            mInnerPaddingColor   = a.getColor(R.styleable.PieChart_egInnerPaddingColor,     DEF_INNER_PADDING_COLOR);
 
         } finally {
             // release the TypedArray so that it can be reused.
@@ -210,7 +212,11 @@ public class PieChart extends BaseChart {
      */
     public void setInnerPaddingColor(int color) {
         mInnerPaddingColor = color;
+<<<<<<< HEAD:src/main/java/org/eazegraph/lib/charts/PieChart.java
         onDataChanged();
+=======
+        mGraph.invalidate();
+>>>>>>> upstream/master:EazeGraphLibrary/src/main/java/org/eazegraph/lib/charts/PieChart.java
     }
 
     /**
@@ -856,7 +862,7 @@ public class PieChart extends BaseChart {
                 mAutoCenterAnimator.setDuration(AUTOCENTER_ANIM_DURATION).start();
             } else {
                 // Dull non-animated version
-                //mPieView.rotateTo(targetAngle);
+                mGraph.rotateTo(targetAngle);
             }
         }
     }
@@ -1074,7 +1080,7 @@ public class PieChart extends BaseChart {
                 PieModel model = mPieData.get(mCurrentItem);
 
                 if(!mUseCustomInnerValue) {
-                    mInnerValueString = model.getValue()+"";
+                    mInnerValueString = Utils.getFloatString(model.getValue(), mShowDecimal);
                 }
 
                 mValuePaint.getTextBounds(mInnerValueString, 0, mInnerValueString.length(), mValueTextBounds);
@@ -1103,7 +1109,7 @@ public class PieChart extends BaseChart {
 
         }
 
-        private Rect    mValueTextBounds = new Rect();
+        private Rect mValueTextBounds = new Rect();
 
     }
 
@@ -1275,6 +1281,7 @@ public class PieChart extends BaseChart {
     public static final int     DEF_VALUE_TEXT_COLOR        = 0xFF898989;
     public static final boolean DEF_USE_CUSTOM_INNER_VALUE  = false;
     public static final boolean DEF_OPEN_CLOCKWISE          = true;
+    public static final int     DEF_INNER_PADDING_COLOR     = 0xFFF3F3F3; // Holo light background
 
     /**
      * The initial fling velocity is divided by this amount.
@@ -1305,7 +1312,7 @@ public class PieChart extends BaseChart {
     private boolean             mUseInnerPadding;
     private float               mInnerPadding;
     private float               mInnerPaddingOutline;
-    private int                 mInnerPaddingColor = Color.parseColor("#fff3f3f3"); // Holo light background
+    private int                 mInnerPaddingColor;
     private float               mHighlightStrength;
     private boolean             mAutoCenterInSlice;
     private boolean             mUsePieRotation;
