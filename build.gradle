@@ -93,6 +93,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 
 // https://github.com/bintray/gradle-bintray-plugin
 bintray {
+    dryRun = true
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
