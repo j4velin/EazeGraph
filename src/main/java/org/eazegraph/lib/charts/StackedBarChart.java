@@ -37,15 +37,13 @@ public class StackedBarChart extends BaseBarChart {
      * that were specified in the XML file. This version uses a default style of
      * 0, so the only attribute values applied are those in the Context's Theme
      * and the given AttributeSet.
-     * <p/>
-     * <p/>
+     *
      * The method onFinishInflate() will be called after all children have been
      * added.
      *
      * @param context The Context the view is running in, through which it can
      *                access the current theme, resources, etc.
      * @param attrs   The attributes of the XML tag that is inflating the view.
-     * @see #View(android.content.Context, android.util.AttributeSet, int)
      */
     public StackedBarChart(Context context, AttributeSet attrs) {
         super(context, attrs);

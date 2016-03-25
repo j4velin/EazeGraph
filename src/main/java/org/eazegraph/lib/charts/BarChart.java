@@ -1,19 +1,18 @@
 /**
-*
-*   Copyright (C) 2014 Paul Cech
-*
-*   Licensed under the Apache License, Version 2.0 (the "License");
-*   you may not use this file except in compliance with the License.
-*   You may obtain a copy of the License at
-*
-*   http://www.apache.org/licenses/LICENSE-2.0
-*
-*   Unless required by applicable law or agreed to in writing, software
-*   distributed under the License is distributed on an "AS IS" BASIS,
-*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*   See the License for the specific language governing permissions and
-*   limitations under the License.
-*/
+ * Copyright (C) 2014 Paul Cech
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package org.eazegraph.lib.charts;
 
@@ -58,24 +57,18 @@ public class BarChart extends BaseBarChart {
      * that were specified in the XML file. This version uses a default style of
      * 0, so the only attribute values applied are those in the Context's Theme
      * and the given AttributeSet.
-     * <p/>
-     * <p/>
+     *
      * The method onFinishInflate() will be called after all children have been
      * added.
      *
      * @param context The Context the view is running in, through which it can
      *                access the current theme, resources, etc.
      * @param attrs   The attributes of the XML tag that is inflating the view.
-     * @see #View(android.content.Context, android.util.AttributeSet, int)
      */
     public BarChart(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.BarChart,
-                0, 0
-        );
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.BarChart, 0, 0);
 
         try {
 
@@ -91,6 +84,7 @@ public class BarChart extends BaseBarChart {
 
     /**
      * Adds a new {@link org.eazegraph.lib.models.BarModel} to the BarChart.
+     *
      * @param _Bar The BarModel which will be added to the chart.
      */
     public void addBar(BarModel _Bar) {
@@ -100,6 +94,7 @@ public class BarChart extends BaseBarChart {
 
     /**
      * Adds a new list of {@link org.eazegraph.lib.models.BarModel} to the BarChart.
+     *
      * @param _List The BarModel list which will be added to the chart.
      */
     public void addBarList(List<BarModel> _List) {
@@ -109,6 +104,7 @@ public class BarChart extends BaseBarChart {
 
     /**
      * Returns the data which is currently present in the chart.
+     *
      * @return The currently used data.
      */
     @Override
@@ -118,6 +114,7 @@ public class BarChart extends BaseBarChart {
 
     /**
      * Determines if the values of each data should be shown in the graph.
+     *
      * @param _showValues true to show values in the graph.
      */
     public void setShowValues(boolean _showValues) {
@@ -127,6 +124,7 @@ public class BarChart extends BaseBarChart {
 
     /**
      * Returns if the values are drawn on top of the bars.
+     *
      * @return True if they are drawn.
      */
     public boolean isShowValues() {
@@ -164,7 +162,7 @@ public class BarChart extends BaseBarChart {
         mValuePaint = new Paint(mLegendPaint);
         mValuePaint.setTextAlign(Paint.Align.CENTER);
 
-        if(this.isInEditMode()) {
+        if (this.isInEditMode()) {
             addBar(new BarModel(2.3f));
             addBar(new BarModel(2.f));
             addBar(new BarModel(3.3f));
@@ -185,15 +183,16 @@ public class BarChart extends BaseBarChart {
 
     /**
      * Calculates the bar boundaries based on the bar width and bar margin.
-     * @param _Width    Calculated bar width
-     * @param _Margin   Calculated bar margin
+     *
+     * @param _Width  Calculated bar width
+     * @param _Margin Calculated bar margin
      */
     protected void calculateBounds(float _Width, float _Margin) {
         float maxValue = 0;
-        int   last = mLeftPadding;
+        int last = mLeftPadding;
 
         for (BarModel model : mData) {
-            if(model.getValue() > maxValue) {
+            if (model.getValue() > maxValue) {
                 maxValue = model.getValue();
             }
         }
@@ -205,17 +204,20 @@ public class BarChart extends BaseBarChart {
         for (BarModel model : mData) {
             float height = model.getValue() * heightMultiplier;
             last += _Margin / 2;
-            model.setBarBounds(new RectF(last, mGraphHeight - height + mTopPadding, last + _Width, mGraphHeight + mTopPadding));
+            model.setBarBounds(new RectF(last, mGraphHeight - height + mTopPadding, last + _Width,
+                    mGraphHeight + mTopPadding));
             model.setLegendBounds(new RectF(last, 0, last + _Width, mLegendHeight));
             last += _Width + (_Margin / 2);
 
         }
 
-        Utils.calculateLegendInformation(mData, mLeftPadding, mGraphWidth + mLeftPadding, mLegendPaint);
+        Utils.calculateLegendInformation(mData, mLeftPadding, mGraphWidth + mLeftPadding,
+                mLegendPaint);
     }
 
     /**
      * Callback method for drawing the bars in the child classes.
+     *
      * @param _Canvas The canvas object of the graph view.
      */
     protected void drawBars(Canvas _Canvas) {
@@ -224,21 +226,21 @@ public class BarChart extends BaseBarChart {
             RectF bounds = model.getBarBounds();
             mGraphPaint.setColor(model.getColor());
 
-            _Canvas.drawRect(
-                    bounds.left,
-                    bounds.bottom - (bounds.height() * mRevealValue),
-                    bounds.right,
-                    bounds.bottom, mGraphPaint);
+            _Canvas.drawRect(bounds.left, bounds.bottom - (bounds.height() * mRevealValue),
+                    bounds.right, bounds.bottom, mGraphPaint);
 
             if (mShowValues) {
-                _Canvas.drawText(Utils.getFloatString(model.getValue(), mShowDecimal), model.getLegendBounds().centerX(),
-                        bounds.bottom - (bounds.height() * mRevealValue) - mValueDistance, mValuePaint);
+                _Canvas.drawText(Utils.getFloatString(model.getValue(), mShowDecimal),
+                        model.getLegendBounds().centerX(),
+                        bounds.bottom - (bounds.height() * mRevealValue) - mValueDistance,
+                        mValuePaint);
             }
         }
     }
 
     /**
      * Returns the list of data sets which hold the information about the legend boundaries and text.
+     *
      * @return List of BaseModel data sets.
      */
     @Override
@@ -263,9 +265,9 @@ public class BarChart extends BaseBarChart {
 
     public static final boolean DEF_SHOW_VALUES = true;
 
-    private List<BarModel>  mData;
+    private List<BarModel> mData;
 
-    private Paint           mValuePaint;
-    protected boolean       mShowValues;
-    private int             mValueDistance = (int) Utils.dpToPx(3);
+    private Paint mValuePaint;
+    protected boolean mShowValues;
+    private int mValueDistance = (int) Utils.dpToPx(3);
 }

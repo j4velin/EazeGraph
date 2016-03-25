@@ -29,8 +29,8 @@ import org.eazegraph.lib.models.BaseModel;
 import org.eazegraph.lib.utils.Utils;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This is the main chart class and should be inherited by every graph. This class provides some general
@@ -59,15 +59,13 @@ public abstract class BaseChart extends ViewGroup {
      * that were specified in the XML file. This version uses a default style of
      * 0, so the only attribute values applied are those in the Context's Theme
      * and the given AttributeSet.
-     * <p/>
-     * <p/>
+     *
      * The method onFinishInflate() will be called after all children have been
      * added.
      *
      * @param context The Context the view is running in, through which it can
      *                access the current theme, resources, etc.
      * @param attrs   The attributes of the XML tag that is inflating the view.
-     * @see #View(android.content.Context, android.util.AttributeSet, int)
      */
     public BaseChart(Context context, AttributeSet attrs) {
         super(context, attrs);

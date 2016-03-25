@@ -1,18 +1,17 @@
 /**
- *
- *   Copyright (C) 2014 Paul Cech
- *
- *   Licensed under the Apache License, Version 2.0 (the "License");
- *   you may not use this file except in compliance with the License.
- *   You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- *   Unless required by applicable law or agreed to in writing, software
- *   distributed under the License is distributed on an "AS IS" BASIS,
- *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *   See the License for the specific language governing permissions and
- *   limitations under the License.
+ * Copyright (C) 2014 Paul Cech
+ * <p/>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.eazegraph.lib.charts;
@@ -50,9 +49,9 @@ public abstract class BaseBarChart extends BaseChart {
     public BaseBarChart(Context context) {
         super(context);
 
-        mBarWidth           = Utils.dpToPx(DEF_BAR_WIDTH);
-        mBarMargin          = Utils.dpToPx(DEF_BAR_MARGIN);
-        mFixedBarWidth      = DEF_FIXED_BAR_WIDTH;
+        mBarWidth = Utils.dpToPx(DEF_BAR_WIDTH);
+        mBarMargin = Utils.dpToPx(DEF_BAR_MARGIN);
+        mFixedBarWidth = DEF_FIXED_BAR_WIDTH;
     }
 
     /**
@@ -61,30 +60,28 @@ public abstract class BaseBarChart extends BaseChart {
      * that were specified in the XML file. This version uses a default style of
      * 0, so the only attribute values applied are those in the Context's Theme
      * and the given AttributeSet.
-     * <p/>
-     * <p/>
+     *
      * The method onFinishInflate() will be called after all children have been
      * added.
      *
      * @param context The Context the view is running in, through which it can
      *                access the current theme, resources, etc.
      * @param attrs   The attributes of the XML tag that is inflating the view.
-     * @see #View(android.content.Context, android.util.AttributeSet, int)
      */
     public BaseBarChart(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs,
-                R.styleable.BaseBarChart,
-                0, 0
-        );
+        TypedArray a =
+                context.getTheme().obtainStyledAttributes(attrs, R.styleable.BaseBarChart, 0, 0);
 
         try {
 
-            mBarWidth           = a.getDimension(R.styleable.BaseBarChart_egBarWidth,         Utils.dpToPx(DEF_BAR_WIDTH));
-            mBarMargin          = a.getDimension(R.styleable.BaseBarChart_egBarMargin,        Utils.dpToPx(DEF_BAR_MARGIN));
-            mFixedBarWidth      = a.getBoolean(R.styleable.BaseBarChart_egFixedBarWidth,      DEF_FIXED_BAR_WIDTH);
+            mBarWidth = a.getDimension(R.styleable.BaseBarChart_egBarWidth,
+                    Utils.dpToPx(DEF_BAR_WIDTH));
+            mBarMargin = a.getDimension(R.styleable.BaseBarChart_egBarMargin,
+                    Utils.dpToPx(DEF_BAR_MARGIN));
+            mFixedBarWidth =
+                    a.getBoolean(R.styleable.BaseBarChart_egFixedBarWidth, DEF_FIXED_BAR_WIDTH);
 
         } finally {
             // release the TypedArray so that it can be reused.
@@ -188,13 +185,13 @@ public abstract class BaseBarChart extends BaseChart {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mWidth  = w;
+        mWidth = w;
         mHeight = h;
 
         mGraph.layout(0, 0, w, (int) (h - mLegendHeight));
         mLegend.layout(0, (int) (h - mLegendHeight), w, h);
 
-        if(getData().size() > 0) {
+        if (getData().size() > 0) {
             onDataChanged();
         }
     }
@@ -274,13 +271,12 @@ public abstract class BaseBarChart extends BaseChart {
         }
 
         float barWidth = mBarWidth;
-        float margin   = mBarMargin;
+        float margin = mBarMargin;
 
-        if(!mFixedBarWidth) {
+        if (!mFixedBarWidth) {
             // calculate the bar width if the bars should be dynamically displayed
             barWidth = (mGraphWidth / _DataSize) - margin;
-        }
-        else {
+        } else {
             // calculate margin between bars if the bars have a fixed width
             float cumulatedBarWidths = barWidth * _DataSize;
             float remainingWidth = mGraphWidth - cumulatedBarWidths;
@@ -352,7 +348,7 @@ public abstract class BaseBarChart extends BaseChart {
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
             super.onSizeChanged(w, h, oldw, oldh);
             mGraphHeight = h - mTopPadding;
-            mGraphWidth  = w - mLeftPadding - mRightPadding;
+            mGraphWidth = w - mLeftPadding - mRightPadding;
         }
 
         @Override
@@ -369,7 +365,7 @@ public abstract class BaseBarChart extends BaseChart {
                 } else {
                     float newX = event.getX();
                     float newY = event.getY();
-                    int   counter = 0;
+                    int counter = 0;
 
                     for (RectF rectF : getBarBounds()) {
                         if (Utils.intersectsPointWithRectF(rectF, newX, newY)) {
@@ -415,15 +411,13 @@ public abstract class BaseBarChart extends BaseChart {
             super.onDraw(canvas);
 
             for (BaseModel model : getLegendData()) {
-                if(model.canShowLabel()) {
+                if (model.canShowLabel()) {
                     RectF bounds = model.getLegendBounds();
-                    canvas.drawText(model.getLegendLabel(), model.getLegendLabelPosition(), bounds.bottom - mMaxFontHeight, mLegendPaint);
-                    canvas.drawLine(
-                            bounds.centerX(),
-                            bounds.bottom - mMaxFontHeight*2 - mLegendTopPadding,
-                            bounds.centerX(),
-                            mLegendTopPadding, mLegendPaint
-                    );
+                    canvas.drawText(model.getLegendLabel(), model.getLegendLabelPosition(),
+                            bounds.bottom - mMaxFontHeight, mLegendPaint);
+                    canvas.drawLine(bounds.centerX(),
+                            bounds.bottom - mMaxFontHeight * 2 - mLegendTopPadding,
+                            bounds.centerX(), mLegendTopPadding, mLegendPaint);
                 }
             }
         }
@@ -452,20 +446,20 @@ public abstract class BaseBarChart extends BaseChart {
     private static final String LOG_TAG = BaseBarChart.class.getSimpleName();
 
     // All float values are dp values and will be converted into px values in the constructor
-    public static final float   DEF_BAR_WIDTH           = 32.f;
-    public static final boolean DEF_FIXED_BAR_WIDTH     = false;
-    public static final float   DEF_BAR_MARGIN          = 12.f;
+    public static final float DEF_BAR_WIDTH = 32.f;
+    public static final boolean DEF_FIXED_BAR_WIDTH = false;
+    public static final float DEF_BAR_MARGIN = 12.f;
 
     protected IOnBarClickedListener mListener = null;
 
-    protected Graph           mGraph;
-    protected Legend          mLegend;
+    protected Graph mGraph;
+    protected Legend mLegend;
 
-    protected Paint           mGraphPaint;
-    protected Paint           mLegendPaint;
+    protected Paint mGraphPaint;
+    protected Paint mLegendPaint;
 
-    protected float           mBarWidth;
-    protected boolean         mFixedBarWidth;
-    protected float           mBarMargin;
+    protected float mBarWidth;
+    protected boolean mFixedBarWidth;
+    protected float mBarMargin;
 
 }
