@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
-version = "1.0.3"
+version = "1.0.4"
 
 android {
 
@@ -11,15 +11,15 @@ android {
         buildToolsVersion rootProject.ext.buildToolsVersion
     } else {
         logger.warn('compileSdkVersion not found in rootProject')
-        compileSdkVersion 22
-        buildToolsVersion "23.0.0 rc3"
+        compileSdkVersion 27
+        buildToolsVersion "27.0.3"
     }
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 20
-        versionCode 103
-        versionName "1.0.3"
+        targetSdkVersion 27
+        versionCode 104
+        versionName "1.0.4"
     }
     buildTypes {
         release {
@@ -30,7 +30,7 @@ android {
     }
 
     dependencies {
-        compile 'com.nineoldandroids:library:2.4.0'
+        implementation 'com.nineoldandroids:library:2.4.0'
     }
 }
 
